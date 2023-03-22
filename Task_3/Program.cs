@@ -33,6 +33,22 @@ public class LinkedList
     public void Add(KeyValuePair pair)
     {
         // add provided pair to the end of the linked list
+        if (_first == null)
+        {
+            _first = new LinkedListNode(pair);
+            _first.Next = null;
+        }
+        else
+        {
+            LinkedListNode add = new LinkedListNode(pair); // better just to write var there?
+            var current = _first;
+            while (current.Next != null)
+            {
+                current = current.Next;
+            }
+
+            current.Next = add;
+        }
     }
 
     public void RemoveByKey(string key)
