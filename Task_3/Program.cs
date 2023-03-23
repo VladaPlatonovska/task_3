@@ -121,5 +121,16 @@ public class StringsDictionary
     private int CalculateHash(string key)
     {
         // function to convert string value to number 
+        var keys = key.ToCharArray();
+        var hashcode = 0;
+        int counter = 0;
+        foreach (var variable in keys)
+        {
+            var byteChar = (byte)variable;
+            hashcode += Convert.ToInt32(byteChar * Math.Pow(2, counter));
+            counter++;
+        }
+
+        return hashcode;
     }
 }
