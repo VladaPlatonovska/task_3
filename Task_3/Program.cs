@@ -1,4 +1,31 @@
-﻿public class KeyValuePair
+﻿StringsDictionary dictWords = new StringsDictionary();
+foreach (var line in File.ReadAllLines("dictionary.txt"))
+{
+    string[] elements = line.Split("; ");
+    string key = elements[0];
+    string value = String.Join("; ", elements[1..]);
+    
+    dictWords.Add(key, value);
+}
+
+bool valid = true;
+while (valid)
+{
+    Console.Write("enter a word: ");
+    string word = Console.ReadLine();
+    Console.WriteLine(dictWords.Get(word.ToUpper()));
+    Console.WriteLine();
+    Console.Write("do you want to continue?[y/n] ");
+    string YesNo = Console.ReadLine();
+
+    if (YesNo == "n")
+    {
+        Console.WriteLine("goodbye sunshine");
+        valid = false;
+    }
+}
+
+public class KeyValuePair
 {
     public string Key { get; }
 
@@ -40,7 +67,7 @@ public class LinkedList
         }
         else
         {
-            LinkedListNode add = new LinkedListNode(pair); // better just to write var there?
+            LinkedListNode add = new LinkedListNode(pair);
             var current = _first;
             while (current.Next != null)
             {
@@ -79,7 +106,7 @@ public class LinkedList
         if (_first == null) return null;
     
         LinkedListNode current = _first;
-        while (current.Next != null)
+        while (current != null)
         {
             if (current.Pair.Key == key)
             {
@@ -104,30 +131,49 @@ public class StringsDictionary
         
     public void Add(string key, string value)
     {
-            
+        var hashKey = CalculateHash(key);
+        var bucketNum = hashKey % InitialSize;
+        if (_buckets[bucketNum] == null) _buckets[bucketNum] = new LinkedList();
+        
+        _buckets[bucketNum].Add(new KeyValuePair(key, value));
+
     }
 
     public void Remove(string key)
     {
-            
+        var hashKey = CalculateHash(key);
+        var bucketNum = hashKey % InitialSize;
+        if (_buckets[bucketNum] != null)
+        {
+            _buckets[bucketNum].RemoveByKey(key);
+        }
     }
 
     public string Get(string key)
     {
-            
+        var hashKey = CalculateHash(key);
+        var bucketNum = hashKey % InitialSize;
+        if (_buckets[bucketNum] == null)
+        {
+            Console.WriteLine("there is no such word in this dict");
+            return null;
+        }
+        
+        var value = _buckets[bucketNum].GetItemWithKey(key);
+        return value.Value;
     }
 
 
-    private int CalculateHash(string key)
+    private long CalculateHash(string key)
     {
         // function to convert string value to number 
         var keys = key.ToCharArray();
-        var hashcode = 0;
+        Int64 hashcode = 0;
         int counter = 0;
         foreach (var variable in keys)
         {
-            var byteChar = (byte)variable;
-            hashcode += Convert.ToInt32(byteChar * Math.Pow(2, counter));
+            var byteChar = (Int64)variable;
+            hashcode += Convert.ToInt64(byteChar * (Int64)Math.Pow(2, counter));
             counter++;
         }
 
