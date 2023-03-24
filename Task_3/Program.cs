@@ -160,6 +160,10 @@ public class StringsDictionary
         }
         
         var value = _buckets[bucketNum].GetItemWithKey(key);
+        if (value == null)
+        {
+            return ("there is no such word in this dict");
+        }
         return value.Value;
     }
 
