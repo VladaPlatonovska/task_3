@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sofma\\task_3\\Task_3\\Task_3.csproj": {}
+    "/Users/platonovskaaa/RiderProjects/Task_3/Task_3/Task_3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sofma\\task_3\\Task_3\\Task_3.csproj": {
+    "/Users/platonovskaaa/RiderProjects/Task_3/Task_3/Task_3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sofma\\task_3\\Task_3\\Task_3.csproj",
+        "projectUniqueName": "/Users/platonovskaaa/RiderProjects/Task_3/Task_3/Task_3.csproj",
         "projectName": "Task_3",
-        "projectPath": "C:\\Users\\sofma\\task_3\\Task_3\\Task_3.csproj",
-        "packagesPath": "C:\\Users\\sofma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sofma\\task_3\\Task_3\\obj\\",
+        "projectPath": "/Users/platonovskaaa/RiderProjects/Task_3/Task_3/Task_3.csproj",
+        "packagesPath": "/Users/platonovskaaa/.nuget/packages/",
+        "outputPath": "/Users/platonovskaaa/RiderProjects/Task_3/Task_3/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sofma\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/platonovskaaa/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -25,6 +25,8 @@ while (valid)
     }
 }
 
+
+
 public class KeyValuePair
 {
     public string Key { get; }
@@ -118,6 +120,11 @@ public class LinkedList
 
         return null;
     }
+
+    public LinkedListNode GetFirst()
+    {
+        return _first;
+    }
 }
 
 
@@ -125,18 +132,18 @@ public class LinkedList
 // dictionary
 public class StringsDictionary
 {
-    private const int InitialSize = 10;
-
+    private static int InitialSize = 10;
     private LinkedList[] _buckets = new LinkedList[InitialSize];
-        
+    private double _loadfactor;
+    private int load;
     public void Add(string key, string value)
     {
         var hashKey = CalculateHash(key);
-        var bucketNum = hashKey % InitialSize;
+        var bucketNum = (hashKey % InitialSize);
         if (_buckets[bucketNum] == null) _buckets[bucketNum] = new LinkedList();
         
         _buckets[bucketNum].Add(new KeyValuePair(key, value));
-
+        CheckLoadFactor();
     }
 
     public void Remove(string key)
@@ -165,6 +172,50 @@ public class StringsDictionary
             return ("there is no such word in this dict");
         }
         return value.Value;
+    }
+    
+
+    private void CheckLoadFactor()
+    {
+        _loadfactor = double.Parse(load.ToString()) / InitialSize;
+        if (_loadfactor >= 0.8)
+        {
+            var newSize = InitialSize * 2;
+            InitialSize = newSize;
+            LinkedList[] newBuckets = new LinkedList[newSize];
+            foreach (var bucket in _buckets)
+            {
+                if (bucket == null)
+                {
+                    continue;
+                }
+
+                var current = bucket.GetFirst();
+                while (current != null)
+                {
+                    var hash = CalculateHash(current.Pair.Key);
+                    var bucketNum = hash % InitialSize;
+                    var head = newBuckets[bucketNum];
+                    var add = current.Pair;
+                    if (head == null)
+                    {
+                        newBuckets[bucketNum] = new LinkedList();
+                        newBuckets[bucketNum].Add(add);
+                    }
+                    else
+                    {
+                        newBuckets[bucketNum].Add(add);
+                    }
+                    current = current.Next;
+                }
+            }
+
+            _buckets = newBuckets;
+        }
+        else
+        {
+            load += 1;
+        }
     }
 
 
